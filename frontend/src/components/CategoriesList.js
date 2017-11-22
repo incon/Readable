@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchCategories } from "../actions/index";
 import "./CategoriesList.css";
 
@@ -14,8 +15,15 @@ class CategoriesList extends Component {
     return (
       <div className="categories-list">
         <ul>
-          <li>All</li>
-          {categories && categories.map(category => <li>{category.name}</li>)}
+          <Link to="/">
+            <li>All</li>
+          </Link>
+          {categories &&
+            categories.map(category => (
+              <Link to={`/category/${category.path}`}>
+                <li>{category.name}</li>
+              </Link>
+            ))}
         </ul>
       </div>
     );
