@@ -20,7 +20,7 @@ class CategoriesList extends Component {
           </Link>
           {categories &&
             categories.map(category => (
-              <Link to={`/category/${category.path}`}>
+              <Link key={category.path} to={`/category/${category.path}`}>
                 <li>{category.name}</li>
               </Link>
             ))}
