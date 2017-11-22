@@ -1,37 +1,52 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchPosts } from "../actions/index";
 
 class PostsList extends Component {
+  componentWillMount() {
+    this.props.fetchPosts();
+  }
+
+  posts() {
+    const { posts, category } = this.props;
+
+    if (!posts) {
+      return false;
+    }
+
+    if (category === "all") {
+      return posts;
+    }
+
+    return posts.filter(post => post.category === category);
+  }
+
   render() {
+    const posts = this.posts();
+
     return (
       <div className="post-list">
-        <div className="post-item">
-          <div>"id": "8xf0y6ziyjabvozdd253nd"</div>
-          <div>"timestamp": 1467166872634</div>
-          <div>"title": "Udacity is the best place to learn React"</div>
-          <div>"body": "Everyone says so after all."</div>
-          <div>"author": "thingtwo"</div>
-          <div>"category": "react"</div>
-          <div>"voteScore": 6</div>
-          <div>"deleted": false</div>
-          <div>"commentCount": 2</div>
+        <div>
+          <Link to="/posts/create">Create Post</Link>
         </div>
-        <div className="post-item">
-          <div>"id": "6ni6ok3ym7mf1p33lnez"</div>
-          <div>"timestamp": 1468479767190</div>
-          <div>"title": "Learn Redux in 10 minutes!"</div>
-          <div>
-            "body": "Just kidding. It takes more than 10 minutes to learn
-            technology."
-          </div>
-          <div>"author": "thingone"</div>
-          <div>"category": "redux"</div>
-          <div>"voteScore": -5</div>
-          <div>"deleted": false</div>
-          <div>"commentCount": 0</div>
-        </div>
+        {posts.length > 0 ? (
+          posts.map(post => (
+            <div key={post.id} className="post-item">
+              <div>Title: {post.title}</div>
+              <div>Body: {post.body}</div>
+            </div>
+          ))
+        ) : (
+          <div>No posts in {this.props.category}</div>
+        )}
       </div>
     );
   }
 }
 
-export default PostsList;
+function mapStateToProps(state) {
+  return { posts: state.posts };
+}
+
+export default connect(mapStateToProps, { fetchPosts })(PostsList);
