@@ -1,5 +1,7 @@
 export const UPDATE_CATEGOROIES = "UPDATE_CATEGORIES";
 export const UPDATE_POSTS = "UPDATE_POSTS";
+export const UPDATE_POST = "UPDATE_POST";
+export const UPDATE_POST_COMMENTS = "UPDATE_POST_COMMENTS";
 
 export const fetchCategories = () => {
   return dispatch => {
@@ -35,4 +37,42 @@ export const fetchPosts = () => {
 export const updatePosts = posts => ({
   type: UPDATE_POSTS,
   posts: posts
+});
+
+export const fetchPost = postId => {
+  return dispatch => {
+    fetch(`http://localhost:3001/posts/${postId}`, {
+      method: "GET",
+      headers: {
+        Authorization: "whatever-you-want"
+      }
+    })
+      .then(res => res.json())
+      .then(json => dispatch(updatePost(postId, json)));
+  };
+};
+
+export const updatePost = (postId, post) => ({
+  type: UPDATE_POST,
+  postId: postId,
+  post: post
+});
+
+export const fetchPostComments = postId => {
+  return dispatch => {
+    fetch(`http://localhost:3001/posts/${postId}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: "whatever-you-want"
+      }
+    })
+      .then(res => res.json())
+      .then(json => dispatch(updatePostComments(postId, json)));
+  };
+};
+
+export const updatePostComments = (postId, comments) => ({
+  type: UPDATE_POST_COMMENTS,
+  postId: postId,
+  comments: comments
 });

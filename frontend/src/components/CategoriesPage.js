@@ -5,7 +5,7 @@ import "./CategoriesPage.css";
 
 class CategoriesPage extends Component {
   render() {
-    const { match = "all" } = this.props;
+    const { match } = this.props;
 
     return (
       <div className="category-page">
