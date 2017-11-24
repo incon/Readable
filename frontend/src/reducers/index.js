@@ -17,6 +17,19 @@ export default function(state = { posts: [], comments: [] }, action) {
         ...state,
         comments: { ...state.comments, [action.postId]: action.comments }
       };
+    case "UPDATE_COMMENT":
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.comment.parentId]: [
+            ...state.comments[action.comment.parentId].filter(
+              comment => comment.id !== action.comment.id
+            ),
+            action.comment
+          ]
+        }
+      };
     default:
       return state;
   }

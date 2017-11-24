@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPost } from "../actions/index";
 import PostCommentsList from "./PostCommentsList";
+import { Link } from "react-router-dom";
 
 class PostPage extends Component {
   componentWillMount() {
@@ -24,6 +25,7 @@ class PostPage extends Component {
     if (post) {
       return (
         <div>
+          <Link to={`/category/${post.category}`}>Back</Link>
           <div>Title: {post.title}</div>
           <div>Body: {post.body}</div>
           <PostCommentsList postId={postId} />

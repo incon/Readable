@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPostComments } from "../actions/index";
-import "./CategoriesList.css";
+import Comment from "./Comment";
 
 class PostCommentsList extends Component {
   componentWillMount() {
@@ -9,17 +9,17 @@ class PostCommentsList extends Component {
   }
 
   render() {
-    const comments = this.props.comments[this.props.postId];
+    const { postId } = this.props;
+    const comments = this.props.comments[postId];
 
     if (comments) {
       return (
-        <div className="comments-list">
-          {comments.map(comment => (
-            <div key={comment.id}>
-              <div>Author: {comment.author}</div>
-              <div>Body: {comment.body}</div>
-            </div>
-          ))}
+        <div className="comments">
+          <div className="comments-list">
+            {comments.map(comment => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+          </div>
         </div>
       );
     }
