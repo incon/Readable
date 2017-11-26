@@ -1,3 +1,33 @@
 .categories-list {
   width: 200px;
+  margin-right: 1em;
+}
+
+.categories-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categories-list a {
+  text-decoration: none;
+  color: #9babb4;
+  font-weight: bold;
+}
+
+.categories-list a:hover {
+  color: #596a73;
+}
+
+.categories-list li {
+  padding: 1em;
+}
+
+.categories-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.categories-heading {
+  font-weight: bold;
+  padding: 1em 0;
 }

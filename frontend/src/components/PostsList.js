@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions/index";
+import { format } from "date-fns";
+import "./PostsList.css";
 
 class PostsList extends Component {
   componentWillMount() {
@@ -27,20 +29,31 @@ class PostsList extends Component {
 
     return (
       <div className="post-list">
-        <div>
-          <Link to="/posts/create">Create Post</Link>
+        <div className="post-list-actions">
+          <Link to="/posts/create">
+            <button>New</button>
+          </Link>
         </div>
         {posts.length > 0 ? (
           posts.map(post => (
-            <div key={post.id} className="post-item">
-              <div>Title: {post.title}</div>
-              <div>Body: {post.body}</div>
-              <Link to={`/post/${post.id}`}>
-                <button>View</button>
-              </Link>
-              <Link to={`/posts/${post.id}/edit`}>
-                <button>Edit</button>
-              </Link>
+            <div className="post-list-item" key={post.id}>
+              <div className="post-list-item-title">{post.title}</div>
+              <div className="post-list-item-body">{post.body}</div>
+              <div>
+                <span className="post-list-item-category">{post.category}</span>
+              </div>
+              <div className="post-list-item-when-by">
+                Posted {format(new Date(post.timestamp), "YYYY-MM-DD HH:mm:ss")}{" "}
+                by {post.author}
+              </div>
+              <div className="post-list-item-footer">
+                <Link to={`/post/${post.id}`}>
+                  <button>View</button>
+                </Link>
+                <Link to={`/posts/${post.id}/edit`}>
+                  <button>Edit</button>
+                </Link>
+              </div>
             </div>
           ))
         ) : (

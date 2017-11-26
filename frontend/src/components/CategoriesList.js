@@ -14,17 +14,20 @@ class CategoriesList extends Component {
 
     return (
       <div className="categories-list">
-        <ul>
-          <Link to="/">
-            <li>All</li>
-          </Link>
-          {categories &&
-            categories.map(category => (
-              <Link key={category.path} to={`/category/${category.path}`}>
-                <li>{category.name}</li>
-              </Link>
-            ))}
-        </ul>
+        <div className="categories-menu">
+          <div className="categories-heading">Categories</div>
+          <ul>
+            <Link to="/">
+              <li>All</li>
+            </Link>
+            {categories &&
+              categories.map(category => (
+                <Link key={category.path} to={`/category/${category.path}`}>
+                  <li>{category.name}</li>
+                </Link>
+              ))}
+          </ul>
+        </div>
       </div>
     );
   }
