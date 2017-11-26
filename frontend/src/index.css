@@ -13,8 +13,9 @@ body {
 button,
 input[type="button"] {
   background-color: #38c172;
+  border: 1px solid #38c172;
+  font-weight: bold;
   color: white;
-  border: 0px;
   font-size: 0.8em;
   margin-right: 0.5em;
   border-radius: 2px;
@@ -25,4 +26,8 @@ button:hover,
 input[type="button"]:hover {
   background-color: #1f9d55;
   cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }
