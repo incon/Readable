@@ -8,7 +8,7 @@ export default function(state = { posts: [], comments: [] }, action) {
       return {
         ...state,
         posts: [
-          ...state.posts.filter(post => post.id !== action.postId),
+          ...state.posts.filter(post => post.id !== action.post.id),
           action.post
         ]
       };

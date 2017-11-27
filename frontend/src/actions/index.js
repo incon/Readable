@@ -49,13 +49,12 @@ export const fetchPost = postId => {
       }
     })
       .then(res => res.json())
-      .then(json => dispatch(updatePost(postId, json)));
+      .then(json => dispatch(updatePost(json)));
   };
 };
 
-export const updatePost = (postId, post) => ({
+export const updatePost = post => ({
   type: UPDATE_POST,
-  postId: postId,
   post: post
 });
 

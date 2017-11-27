@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import CommentEdit from "./CommentEdit";
 import { connect } from "react-redux";
 import { fetchPostComments } from "../actions/index";
+import Score from "./Score";
 
 class Comment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: false,
-      comment: this.props.comment
+      edit: false
     };
   }
 
   deleteComment(comment) {
-    debugger;
     fetch(`http://localhost:3001/comments/${comment.id}`, {
       method: "delete",
       headers: {
@@ -26,9 +25,10 @@ class Comment extends Component {
   }
 
   view() {
-    const { comment } = this.state;
+    const { comment } = this.props;
     return (
       <div className="comment">
+        <Score type="comments" data={comment} />
         <div>Author: {comment.author}</div>
         <div>Body: {comment.body}</div>
         <button onClick={() => this.setState({ edit: true })}>Edit</button>
@@ -50,7 +50,7 @@ class Comment extends Component {
     if (this.state.edit) {
       return (
         <CommentEdit
-          comment={this.state.comment}
+          comment={this.props.comment}
           update={this.update}
           cancel={this.cancel}
         />

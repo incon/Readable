@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions/index";
 import { format } from "date-fns";
+import Score from "./Score";
 
 class Post extends Component {
   deletePost(postId) {
@@ -24,7 +25,7 @@ class Post extends Component {
     return (
       <div className="post-list-item">
         <div className="post-list-item-title">{post.title}</div>
-        <div className="post-list-item-score">Score {post.voteScore}</div>
+        <Score type="posts" data={post} />
         <div className="post-list-item-body">{post.body}</div>
         <div>
           <span className="post-list-item-category">{post.category}</span>
