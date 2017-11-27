@@ -14,6 +14,7 @@ class CategoriesPage extends Component {
         />
         <PostsList
           category={match.params.category ? match.params.category : "all"}
+          history={this.props.history}
         />
       </div>
     );

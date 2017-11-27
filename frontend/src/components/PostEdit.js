@@ -130,7 +130,7 @@ class PostEdit extends Component {
       <form onSubmit={event => this.submit(event)}>
         <input type="hidden" value={this.state.id} />
         <label>
-          Title:
+          Title<br />
           <input
             name="title"
             type="text"
@@ -140,7 +140,7 @@ class PostEdit extends Component {
         </label>
         <br />
         <label>
-          body:
+          Body<br />
           <textarea
             value={this.state.body}
             name="body"
@@ -149,7 +149,7 @@ class PostEdit extends Component {
         </label>
         <br />
         <label>
-          Author:
+          Author<br />
           <input
             name="author"
             type="text"
@@ -159,6 +159,7 @@ class PostEdit extends Component {
           />
         </label>
         <br />
+        Category<br />
         <select
           name="category"
           value={this.state.category}
@@ -174,9 +175,13 @@ class PostEdit extends Component {
         </select>
         <br />
         {this.props.new ? (
-          <input disabled={!this.validate()} type="submit" value="Submit" />
+          <button disabled={!this.validate()} type="submit">
+            Submit
+          </button>
         ) : (
-          <input disabled={!this.validate()} type="submit" value="Update" />
+          <button disabled={!this.validate()} type="submit">
+            Update
+          </button>
         )}
       </form>
     );

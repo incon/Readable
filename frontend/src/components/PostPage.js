@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPost } from "../actions/index";
 import PostCommentsList from "./PostCommentsList";
 import { Link } from "react-router-dom";
+import Post from "./Post";
 
 class PostPage extends Component {
   componentWillMount() {
@@ -25,11 +26,12 @@ class PostPage extends Component {
     if (post) {
       return (
         <div>
-          <Link to={`/category/${post.category}`}>Home</Link>
+          <Link to="/">Home</Link>
           <span> > </span>
           <Link to={`/category/${post.category}`}>{post.category}</Link>
-          <div>Title: {post.title}</div>
-          <div>Body: {post.body}</div>
+          <br />
+          <br />
+          <Post post={post} history={this.props.history} />
           <PostCommentsList postId={postId} />
         </div>
       );

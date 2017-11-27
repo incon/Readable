@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions/index";
-import { format } from "date-fns";
+import Post from "./Post";
 import "./PostsList.css";
 
 class PostsList extends Component {
@@ -14,6 +14,10 @@ class PostsList extends Component {
   }
 
   componentWillMount() {
+    this.props.fetchPosts();
+  }
+
+  refresh() {
     this.props.fetchPosts();
   }
 
@@ -130,26 +134,13 @@ class PostsList extends Component {
         </div>
         {posts.length > 0 ? (
           posts.map(post => (
-            <div className="post-list-item" key={post.id}>
-              <div className="post-list-item-title">{post.title}</div>
-              <div className="post-list-item-score">Score {post.voteScore}</div>
-              <div className="post-list-item-body">{post.body}</div>
-              <div>
-                <span className="post-list-item-category">{post.category}</span>
-              </div>
-              <div className="post-list-item-when-by">
-                Posted {format(new Date(post.timestamp), "YYYY-MM-DD HH:mm:ss")}{" "}
-                by {post.author}
-              </div>
-              <div className="post-list-item-footer">
-                <Link to={`/post/${post.id}`}>
-                  <button>View</button>
-                </Link>
-                <Link to={`/posts/${post.id}/edit`}>
-                  <button>Edit</button>
-                </Link>
-              </div>
-            </div>
+            <Post
+              key={post.id}
+              post={post}
+              view={true}
+              history={this.props.history}
+              refresh={this.refresh}
+            />
           ))
         ) : (
           <div>No posts in {this.props.category}</div>
