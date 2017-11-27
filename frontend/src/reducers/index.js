@@ -32,6 +32,11 @@ export default function(state = { posts: [], comments: [] }, action) {
             : []
         }
       };
+    case "REMOVE_POST":
+      return {
+        ...state,
+        posts: state.posts.filter(post => post.id !== action.postId)
+      };
     default:
       return state;
   }

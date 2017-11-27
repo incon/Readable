@@ -1,22 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPosts } from "../actions/index";
+import { deletePost } from "../actions/index";
 import { format } from "date-fns";
 import Score from "./Score";
 
 class Post extends Component {
-  deletePost(postId) {
-    fetch(`http://localhost:3001/posts/${postId}`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "whatever-you-want"
-      }
-    })
-      .then(res => res.json())
-      .then(this.props.fetchPosts())
-      .then(this.props.history.push(`/`));
+  removePost(postId) {
+    this.props.deletePost(postId);
+    this.props.history.push(`/`);
   }
 
   render() {
@@ -46,11 +38,11 @@ class Post extends Component {
           <Link to={`/posts/${post.id}/edit`}>
             <button>Edit</button>
           </Link>
-          <button onClick={() => this.deletePost(post.id)}>Delete</button>
+          <button onClick={() => this.removePost(post.id)}>Delete</button>
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, { fetchPosts })(Post);
+export default connect(null, { deletePost })(Post);

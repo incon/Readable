@@ -3,6 +3,7 @@ export const UPDATE_POSTS = "UPDATE_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
 export const UPDATE_POST_COMMENTS = "UPDATE_POST_COMMENTS";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const REMOVE_POST = "REMOVE_POST";
 
 export const fetchCategories = () => {
   return dispatch => {
@@ -111,5 +112,26 @@ export const createComment = comment => {
     })
       .then(res => res.json())
       .then(comment => dispatch(updateComment(comment)));
+  };
+};
+
+export const deletePost = postId => {
+  return dispatch => {
+    fetch(`http://localhost:3001/posts/${postId}`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "whatever-you-want"
+      }
+    })
+      .then(res => res.json())
+      .then(json => dispatch(removePost(postId)));
+  };
+};
+
+export const removePost = postId => {
+  return {
+    type: REMOVE_POST,
+    postId: postId
   };
 };
