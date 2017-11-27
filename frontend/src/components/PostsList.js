@@ -73,11 +73,18 @@ class PostsList extends Component {
     }
   };
 
+  toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
   render() {
     const posts = this.posts();
 
     return (
       <div className="post-list">
+        <h2>{this.toTitleCase(this.props.category)} Posts</h2>
         <div className="post-list-actions">
           <span className="sort-item">
             <span className="sort-label">Score</span>

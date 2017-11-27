@@ -31,3 +31,7 @@
   font-weight: bold;
   padding: 1em 0;
 }
+
+.categories-list a.link-active {
+  color: #596a73;
+}

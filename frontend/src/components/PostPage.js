@@ -25,7 +25,9 @@ class PostPage extends Component {
     if (post) {
       return (
         <div>
-          <Link to={`/category/${post.category}`}>Back</Link>
+          <Link to={`/category/${post.category}`}>Home</Link>
+          <span> > </span>
+          <Link to={`/category/${post.category}`}>{post.category}</Link>
           <div>Title: {post.title}</div>
           <div>Body: {post.body}</div>
           <PostCommentsList postId={postId} />

@@ -9,7 +9,9 @@ class CategoriesPage extends Component {
 
     return (
       <div className="category-page">
-        <CategoriesList />
+        <CategoriesList
+          category={match.params.category ? match.params.category : "all"}
+        />
         <PostsList
           category={match.params.category ? match.params.category : "all"}
         />

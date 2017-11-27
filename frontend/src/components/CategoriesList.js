@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { fetchCategories } from "../actions/index";
 import "./CategoriesList.css";
 
@@ -17,14 +17,19 @@ class CategoriesList extends Component {
         <div className="categories-menu">
           <div className="categories-heading">Categories</div>
           <ul>
-            <Link to="/">
+            <NavLink exact activeClassName="link-active" to="/">
               <li>All</li>
-            </Link>
+            </NavLink>
             {categories &&
               categories.map(category => (
-                <Link key={category.path} to={`/category/${category.path}`}>
+                <NavLink
+                  exact
+                  to={`/category/${category.path}`}
+                  activeClassName="link-active"
+                  key={category.path}
+                >
                   <li>{category.name}</li>
-                </Link>
+                </NavLink>
               ))}
           </ul>
         </div>
