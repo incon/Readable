@@ -15,7 +15,7 @@ class App extends Component {
         </header>
         <Route exact path="/" component={CategoriesPage} />
         <Route path="/category/:category" component={CategoriesPage} />
-        <Route path="/post/:postId" component={PostPage} />
+        <Route path="/:category/:postId" component={PostPage} />
         <Route exact path="/posts/create" component={PostCreatePage} />
         <Route path="/posts/:postId/edit" component={PostEditPage} />
       </div>

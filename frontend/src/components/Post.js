@@ -39,7 +39,7 @@ class Post extends Component {
         </div>
         <div className="post-list-item-footer">
           {this.props.view && (
-            <Link to={`/post/${post.id}`}>
+            <Link to={`/${post.category}/${post.id}`}>
               <button>View</button>
             </Link>
           )}
