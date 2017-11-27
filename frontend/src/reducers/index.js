@@ -37,6 +37,16 @@ export default function(state = { posts: [], comments: [] }, action) {
         ...state,
         posts: state.posts.filter(post => post.id !== action.postId)
       };
+    case "REMOVE_COMMENT":
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.comment.parentId]: state.comments[
+            action.comment.parentId
+          ].filter(comment => comment.id !== action.comment.id)
+        }
+      };
     default:
       return state;
   }

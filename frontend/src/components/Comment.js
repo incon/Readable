@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CommentEdit from "./CommentEdit";
 import { connect } from "react-redux";
-import { fetchPostComments } from "../actions/index";
+import { deleteComment } from "../actions/index";
 import { format } from "date-fns";
 import Score from "./Score";
 
@@ -13,16 +13,8 @@ class Comment extends Component {
     };
   }
 
-  deleteComment(comment) {
-    fetch(`http://localhost:3001/comments/${comment.id}`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "whatever-you-want"
-      }
-    })
-      .then(res => res.json())
-      .then(this.props.fetchPostComments(comment.parentId));
+  removeComment(comment) {
+    this.props.deleteComment(comment);
   }
 
   view() {
@@ -38,7 +30,7 @@ class Comment extends Component {
         </div>
         <div className="comment-footer">
           <button onClick={() => this.setState({ edit: true })}>Edit</button>
-          <button onClick={() => this.deleteComment(comment)}>Delete</button>
+          <button onClick={() => this.removeComment(comment)}>Delete</button>
         </div>
       </div>
     );
@@ -68,4 +60,4 @@ class Comment extends Component {
   }
 }
 
-export default connect(null, { fetchPostComments })(Comment);
+export default connect(null, { deleteComment })(Comment);

@@ -33,13 +33,17 @@ class PostCommentsList extends Component {
     this.setState({ addComment: false });
   };
 
+  update = () => {
+    this.setState({ addComment: false });
+  };
+
   render() {
     const { postId } = this.props;
     let comments = this.props.comments[postId]
       ? this.props.comments[postId].sort((a, b) => this.sortByScore(b, a))
-      : false;
+      : {};
 
-    if (comments) {
+    if (comments.length > 0) {
       return (
         <div className="comments">
           {comments.length > 0 && <h2>Comments</h2>}
@@ -54,13 +58,34 @@ class PostCommentsList extends Component {
               Add Comment
             </button>
           ) : (
-            <CommentEdit new={true} cancel={this.cancel} parentId={postId} />
+            <CommentEdit
+              new={true}
+              cancel={this.cancel}
+              update={this.update}
+              parentId={postId}
+            />
           )}
         </div>
       );
     }
 
-    return <div>No comments found</div>;
+    return (
+      <div>
+        <div>No comments found</div>
+        {!this.state.addComment ? (
+          <button onClick={() => this.setState({ addComment: true })}>
+            Add Comment
+          </button>
+        ) : (
+          <CommentEdit
+            new={true}
+            cancel={this.cancel}
+            update={this.update}
+            parentId={postId}
+          />
+        )}
+      </div>
+    );
   }
 }
 

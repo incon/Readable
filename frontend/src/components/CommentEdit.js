@@ -39,7 +39,7 @@ class CommentEdit extends Component {
     }));
   };
 
-  submit(event) {
+  submit = event => {
     event.preventDefault();
     const { id, body, author } = this.state.comment;
     const comment = {
@@ -55,11 +55,12 @@ class CommentEdit extends Component {
         timestamp: Date.now(),
         parentId: this.props.parentId
       });
+      this.props.update();
     } else {
       this.props.patchComment(comment);
       this.props.update(this.state.comment);
     }
-  }
+  };
 
   render() {
     const { comment } = this.state;
