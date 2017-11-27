@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { patchComment } from "../actions/index";
+import { patchComment, createComment } from "../actions/index";
 import { connect } from "react-redux";
 
 class CommentEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: this.props.comment,
-      isValid: false
+      comment: this.props.new ? { body: "", author: "" } : this.props.comment
     };
   }
 
@@ -15,8 +14,16 @@ class CommentEdit extends Component {
     this.setState({ isValid: this.validate(this.props.comment) });
   }
 
-  validate(comment) {
-    const { body, author } = comment;
+  randomId() {
+    const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    let result = "";
+    for (var i = 20; i > 0; --i)
+      result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  }
+
+  validate() {
+    const { body, author } = this.state.comment;
     return body !== "" && author !== "";
   }
 
@@ -41,8 +48,17 @@ class CommentEdit extends Component {
       author
     };
 
-    this.props.patchComment(comment);
-    this.props.update(this.state.comment);
+    if (this.props.new) {
+      this.props.createComment({
+        ...comment,
+        id: this.randomId(),
+        timestamp: Date.now(),
+        parentId: this.props.parentId
+      });
+    } else {
+      this.props.patchComment(comment);
+      this.props.update(this.state.comment);
+    }
   }
 
   render() {
@@ -51,7 +67,7 @@ class CommentEdit extends Component {
       <div className="comment">
         <form onSubmit={event => this.submit(event)}>
           <label>
-            Name:
+            Name<br />
             <textarea
               name="body"
               value={comment.body}
@@ -60,7 +76,7 @@ class CommentEdit extends Component {
           </label>
           <br />
           <label>
-            Author:
+            Author<br />
             <input
               name="author"
               type="text"
@@ -69,16 +85,22 @@ class CommentEdit extends Component {
             />
           </label>
           <br />
-          <input
-            type="button"
-            onClick={event => this.props.cancel(event)}
-            value="cancel"
-          />
-          <input disabled={!this.state.isValid} type="submit" value="Update" />
+          <button type="button" onClick={event => this.props.cancel(event)}>
+            Cancel
+          </button>
+          {this.props.new ? (
+            <button disabled={!this.validate()} type="submit">
+              Submit
+            </button>
+          ) : (
+            <button disabled={!this.validate()} type="submit">
+              Update
+            </button>
+          )}
         </form>
       </div>
     );
   }
 }
 
-export default connect(null, { patchComment })(CommentEdit);
+export default connect(null, { patchComment, createComment })(CommentEdit);

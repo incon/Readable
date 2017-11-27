@@ -99,3 +99,18 @@ export const updateComment = comment => {
     comment: comment
   };
 };
+
+export const createComment = comment => {
+  return dispatch => {
+    fetch(`http://localhost:3001/comments`, {
+      method: "post",
+      body: JSON.stringify(comment),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "whatever-you-want"
+      }
+    })
+      .then(res => res.json())
+      .then(comment => dispatch(updateComment(comment)));
+  };
+};

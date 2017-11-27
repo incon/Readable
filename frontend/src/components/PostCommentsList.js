@@ -2,8 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPostComments } from "../actions/index";
 import Comment from "./Comment";
+import CommentEdit from "./CommentEdit";
 
 class PostCommentsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addComment: false
+    };
+  }
+
   componentWillMount() {
     this.props.fetchPostComments(this.props.postId);
   }
@@ -18,6 +26,11 @@ class PostCommentsList extends Component {
 
     return 0;
   }
+
+  cancel = event => {
+    event.preventDefault();
+    this.setState({ addComment: false });
+  };
 
   render() {
     const { postId } = this.props;
@@ -34,6 +47,14 @@ class PostCommentsList extends Component {
               <Comment key={comment.id} comment={comment} postId={postId} />
             ))}
           </div>
+          <br />
+          {!this.state.addComment ? (
+            <button onClick={() => this.setState({ addComment: true })}>
+              Add Comment
+            </button>
+          ) : (
+            <CommentEdit new={true} cancel={this.cancel} parentId={postId} />
+          )}
         </div>
       );
     }

@@ -22,12 +22,14 @@ export default function(state = { posts: [], comments: [] }, action) {
         ...state,
         comments: {
           ...state.comments,
-          [action.comment.parentId]: [
-            ...state.comments[action.comment.parentId].filter(
-              comment => comment.id !== action.comment.id
-            ),
-            action.comment
-          ]
+          [action.comment.parentId]: state.comments[action.comment.parentId]
+            ? [
+                ...state.comments[action.comment.parentId].filter(
+                  comment => comment.id !== action.comment.id
+                ),
+                action.comment
+              ]
+            : []
         }
       };
     default:
