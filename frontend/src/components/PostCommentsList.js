@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPostComments } from "../actions/index";
 import Comment from "./Comment";
 import CommentEdit from "./CommentEdit";
+import "./Comment.css";
 
 class PostCommentsList extends Component {
   constructor(props) {

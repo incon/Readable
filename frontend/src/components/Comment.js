@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CommentEdit from "./CommentEdit";
 import { connect } from "react-redux";
 import { fetchPostComments } from "../actions/index";
+import { format } from "date-fns";
 import Score from "./Score";
 
 class Comment extends Component {
@@ -28,11 +29,17 @@ class Comment extends Component {
     const { comment } = this.props;
     return (
       <div className="comment">
+        <h3>Comment</h3>
         <Score type="comments" data={comment} />
-        <div>Author: {comment.author}</div>
-        <div>Body: {comment.body}</div>
-        <button onClick={() => this.setState({ edit: true })}>Edit</button>
-        <button onClick={() => this.deleteComment(comment)}>Delete</button>
+        <div className="comment-body">{comment.body}</div>
+        <div className="comment-when-by">
+          Posted {format(new Date(comment.timestamp), "YYYY-MM-DD HH:mm:ss")} by{" "}
+          {comment.author}
+        </div>
+        <div className="comment-footer">
+          <button onClick={() => this.setState({ edit: true })}>Edit</button>
+          <button onClick={() => this.deleteComment(comment)}>Delete</button>
+        </div>
       </div>
     );
   }
