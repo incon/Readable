@@ -13,7 +13,7 @@ class PostsList extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts();
   }
 

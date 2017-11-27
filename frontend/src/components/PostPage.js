@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Post from "./Post";
 
 class PostPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const postId = this.props.match.params.postId;
     this.props.fetchPost(postId);
   }

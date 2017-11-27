@@ -17,7 +17,7 @@ class PostEdit extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.new) {
     } else {
       this.props.fetchPost(this.props.postId);

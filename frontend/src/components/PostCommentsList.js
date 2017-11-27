@@ -13,7 +13,7 @@ class PostCommentsList extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPostComments(this.props.postId);
   }
   sortByScore(a, b) {

@@ -5,7 +5,7 @@ import { fetchCategories } from "../actions/index";
 import "./CategoriesList.css";
 
 class CategoriesList extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCategories();
   }
 
