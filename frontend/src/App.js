@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import CategoriesPage from "./components/CategoriesPage";
 import PostPage from "./components/PostPage";
 import PostCreatePage from "./components/PostCreatePage";
@@ -13,11 +13,13 @@ class App extends Component {
         <header>
           <h1>Readable</h1>
         </header>
-        <Route exact path="/" component={CategoriesPage} />
-        <Route path="/category/:category" component={CategoriesPage} />
-        <Route path="/:category/:postId" component={PostPage} />
-        <Route exact path="/posts/create" component={PostCreatePage} />
-        <Route path="/posts/:postId/edit" component={PostEditPage} />
+        <Switch>
+          <Route exact path="/" component={CategoriesPage} />
+          <Route path="/posts/:postId/edit" component={PostEditPage} />
+          <Route path="/posts/create" component={PostCreatePage} />
+          <Route path="/:category/:postId" component={PostPage} />
+          <Route path="/:category" component={CategoriesPage} />
+        </Switch>
       </div>
     );
   }

@@ -109,7 +109,7 @@ class PostEdit extends Component {
       }
     })
       .then(res => res.json())
-      .then(this.props.history.push(`/post/${post.id}`));
+      .then(this.props.history.push(`/${post.category}/${post.id}`));
   }
 
   patchPost(post) {
@@ -122,7 +122,7 @@ class PostEdit extends Component {
       }
     })
       .then(res => res.json())
-      .then(this.props.history.push(`/post/${post.id}`));
+      .then(this.props.history.push(`/${post.category}/${post.id}`));
   }
 
   render() {

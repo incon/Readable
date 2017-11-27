@@ -24,7 +24,7 @@ class CategoriesList extends Component {
               categories.map(category => (
                 <NavLink
                   exact
-                  to={`/category/${category.path}`}
+                  to={`/${category.path}`}
                   activeClassName="link-active"
                   key={category.path}
                 >

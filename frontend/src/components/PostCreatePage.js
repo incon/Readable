@@ -7,7 +7,7 @@ function PostCretePage(props) {
     <div>
       <Link to="/">Home</Link>
       <h2>Create a New Post</h2>
-      <PostEdit new={true} history={this.props.history} />
+      <PostEdit new={true} history={props.history} />
     </div>
   );
 }
