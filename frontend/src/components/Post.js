@@ -25,6 +25,9 @@ class Post extends Component {
     return (
       <div className="post-list-item">
         <div className="post-list-item-title">{post.title}</div>
+        <div className="post-list-item-comments">
+          Comments: {post.commentCount}
+        </div>
         <Score type="posts" data={post} />
         <div className="post-list-item-body">{post.body}</div>
         <div>

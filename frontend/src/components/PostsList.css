@@ -46,6 +46,10 @@
   border-radius: 999px;
 }
 
+.post-list-item-comments {
+  padding-bottom: 0.5em;
+}
+
 .post-list-item-when-by {
   color: #9babb4;
   font-size: 0.8em;
