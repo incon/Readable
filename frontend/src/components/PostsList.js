@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPosts } from "../actions/index";
+import { fetchPosts, deletePost } from "../actions/index";
 import Post from "./Post";
 import "./PostsList.css";
 
@@ -17,9 +17,9 @@ class PostsList extends Component {
     this.props.fetchPosts();
   }
 
-  refresh() {
-    this.props.fetchPosts();
-  }
+  onRemovePost = postId => {
+    this.props.deletePost(postId);
+  };
 
   posts() {
     const { posts, category } = this.props;
@@ -138,8 +138,7 @@ class PostsList extends Component {
               key={post.id}
               post={post}
               view={true}
-              history={this.props.history}
-              refresh={this.refresh}
+              onRemovePost={this.onRemovePost}
             />
           ))
         ) : (
@@ -154,4 +153,4 @@ function mapStateToProps(state) {
   return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsList);
+export default connect(mapStateToProps, { fetchPosts, deletePost })(PostsList);

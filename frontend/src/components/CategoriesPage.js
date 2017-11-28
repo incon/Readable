@@ -13,7 +13,6 @@ function CategoriesPage(props) {
       />
       <PostsList
         category={match.params.category ? match.params.category : "all"}
-        history={props.history}
       />
     </div>
   );

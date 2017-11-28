@@ -1,17 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deletePost } from "../actions/index";
 import { format } from "date-fns";
 import Score from "./Score";
 
 function Post(props) {
   const { post } = props;
-
-  const removePost = postId => {
-    props.deletePost(postId);
-    props.history.push(`/`);
-  };
 
   return (
     <div className="post-list-item">
@@ -37,10 +30,10 @@ function Post(props) {
         <Link to={`/posts/${post.id}/edit`}>
           <button>Edit</button>
         </Link>
-        <button onClick={() => removePost(post.id)}>Delete</button>
+        <button onClick={() => props.onRemovePost(post.id)}>Delete</button>
       </div>
     </div>
   );
 }
 
-export default connect(null, { deletePost })(Post);
+export default Post;
