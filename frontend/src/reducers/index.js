@@ -1,6 +1,16 @@
+import {
+  UPDATE_CATEGORIES,
+  UPDATE_POSTS,
+  UPDATE_POST,
+  UPDATE_POST_COMMENTS,
+  UPDATE_COMMENT,
+  REMOVE_POST,
+  REMOVE_COMMENT
+} from "../actions/types";
+
 export default function(state = { posts: [], comments: [] }, action) {
   switch (action.type) {
-    case "UPDATE_CATEGORIES":
+    case UPDATE_CATEGORIES:
       return { ...state, categories: action.categories };
     case "UPDATE_POSTS":
       return { ...state, posts: action.posts };
@@ -12,12 +22,12 @@ export default function(state = { posts: [], comments: [] }, action) {
           action.post
         ]
       };
-    case "UPDATE_POST_COMMENTS":
+    case UPDATE_POST_COMMENTS:
       return {
         ...state,
         comments: { ...state.comments, [action.postId]: action.comments }
       };
-    case "UPDATE_COMMENT":
+    case UPDATE_COMMENT:
       return {
         ...state,
         comments: {
@@ -32,12 +42,12 @@ export default function(state = { posts: [], comments: [] }, action) {
             : []
         }
       };
-    case "REMOVE_POST":
+    case REMOVE_POST:
       return {
         ...state,
         posts: state.posts.filter(post => post.id !== action.postId)
       };
-    case "REMOVE_COMMENT":
+    case REMOVE_COMMENT:
       return {
         ...state,
         comments: {

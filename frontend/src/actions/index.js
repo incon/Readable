@@ -1,10 +1,12 @@
-export const UPDATE_CATEGOROIES = "UPDATE_CATEGORIES";
-export const UPDATE_POSTS = "UPDATE_POSTS";
-export const UPDATE_POST = "UPDATE_POST";
-export const UPDATE_POST_COMMENTS = "UPDATE_POST_COMMENTS";
-export const UPDATE_COMMENT = "UPDATE_COMMENT";
-export const REMOVE_POST = "REMOVE_POST";
-export const REMOVE_COMMENT = "REMOVE_COMMENT";
+import {
+  UPDATE_CATEGORIES,
+  UPDATE_POSTS,
+  UPDATE_POST,
+  UPDATE_POST_COMMENTS,
+  UPDATE_COMMENT,
+  REMOVE_POST,
+  REMOVE_COMMENT
+} from "./types";
 
 export const fetchCategories = () => {
   return dispatch => {
@@ -20,7 +22,7 @@ export const fetchCategories = () => {
 };
 
 export const updateCategories = categories => ({
-  type: UPDATE_CATEGOROIES,
+  type: UPDATE_CATEGORIES,
   categories: categories
 });
 
